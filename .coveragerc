@@ -1,0 +1,16 @@
+[paths]
+source =
+   src/singletons
+   */site-packages/singletons
+
+[run]
+branch = true
+source =
+    singletons
+    tests
+parallel = true
+
+[report]
+show_missing = true
+precision = 2
+omit = *migrations*
