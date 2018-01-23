@@ -28,6 +28,7 @@ author = u'James M Allen'
 copyright = '{0}, {1}'.format(year, author)
 version = release = u'0.1.0'
 
+default_role = 'any'
 pygments_style = 'trac'
 templates_path = ['.']
 extlinks = {

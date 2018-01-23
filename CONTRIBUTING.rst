@@ -35,7 +35,7 @@ If you are proposing a feature:
 Development
 ===========
 
-To set up `python-singletons` for local development:
+To set up ``python-singletons`` for local development:
 
 1. Fork `python-singletons <https://github.com/jamesmallen/python-singletons>`_
    (look for the "Fork" button).

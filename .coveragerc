@@ -1,6 +1,5 @@
 [paths]
 source =
-   src/singletons
    */site-packages/singletons
 
 [run]

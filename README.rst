@@ -10,10 +10,10 @@ Overview
     * - docs
       - |docs|
     * - tests
-      - | |travis| |appveyor| |requires|
-        |
+      - |travis|
     * - package
-      - | |version| |wheel| |supported-versions| |supported-implementations|
+      - |version| |supported-versions| |supported-implementations|
+.. commented out
         | |commits-since|
 
 .. |docs| image:: https://readthedocs.org/projects/python-singletons/badge/?style=flat
@@ -24,25 +24,14 @@ Overview
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/jamesmallen/python-singletons
 
-.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/jamesmallen/python-singletons?branch=master&svg=true
-    :alt: AppVeyor Build Status
-    :target: https://ci.appveyor.com/project/jamesmallen/python-singletons
-
-.. |requires| image:: https://requires.io/github/jamesmallen/python-singletons/requirements.svg?branch=master
-    :alt: Requirements Status
-    :target: https://requires.io/github/jamesmallen/python-singletons/requirements/?branch=master
-
 .. |version| image:: https://img.shields.io/pypi/v/singletons.svg
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/singletons
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/jamesmallen/python-singletons/v0.1.0.svg
-    :alt: Commits since latest release
-    :target: https://github.com/jamesmallen/python-singletons/compare/v0.1.0...master
-
-.. |wheel| image:: https://img.shields.io/pypi/wheel/singletons.svg
-    :alt: PyPI Wheel
-    :target: https://pypi.python.org/pypi/singletons
+.. commented out
+    .. |commits-since| image:: https://img.shields.io/github/commits-since/jamesmallen/python-singletons/v0.1.0.svg
+        :alt: Commits since latest release
+        :target: https://github.com/jamesmallen/python-singletons/compare/v0.1.0...master
 
 .. |supported-versions| image:: https://img.shields.io/pypi/pyversions/singletons.svg
     :alt: Supported versions
@@ -55,7 +44,7 @@ Overview
 
 .. end-badges
 
-An example package. Generated with cookiecutter-pylibrary.
+Declaring singleton classes and singleton factories with different scopes of instantiation, striving for thread-safety and simplicity.
 
 * Free software: MIT license
 
@@ -65,6 +54,20 @@ Installation
 ::
 
     pip install singletons
+
+Quick Example
+=============
+
+::
+
+	import singletons
+
+    @singletons.GlobalFactory
+    def my_uuid():
+        return uuid.uuid4()
+
+    # elsewhere...
+    my_uuid()  # will return the global instance of a UUID object
 
 Documentation
 =============
@@ -77,20 +80,3 @@ Development
 To run the all tests run::
 
     tox
-
-Note, to combine the coverage data from all the tox environments run:
-
-.. list-table::
-    :widths: 10 90
-    :stub-columns: 1
-
-    - - Windows
-      - ::
-
-            set PYTEST_ADDOPTS=--cov-append
-            tox
-
-    - - Other
-      - ::
-
-            PYTEST_ADDOPTS=--cov-append tox

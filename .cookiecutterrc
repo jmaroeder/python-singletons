@@ -16,7 +16,7 @@
 
 default_context:
 
-    appveyor:                  'yes'
+    appveyor:                  'no'
     c_extension_function:      'longest'
     c_extension_module:        '_singletons'
     c_extension_optional:      'no'
