@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name='singletons',
-    version='0.1.0',
+    version='0.2.0',
     license='MIT license',
     description='An example package. Generated with cookiecutter-pylibrary.',
     long_description='%s\n%s' % (

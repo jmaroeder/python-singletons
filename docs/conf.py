@@ -26,7 +26,7 @@ project = u'singletons'
 year = '2018'
 author = u'James M Allen'
 copyright = '{0}, {1}'.format(year, author)
-version = release = u'0.1.0'
+version = release = u'version = release = '0.2.0''
 
 default_role = 'any'
 pygments_style = 'trac'
