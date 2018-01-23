@@ -13,8 +13,7 @@ Overview
       - |travis|
     * - package
       - |version| |supported-versions| |supported-implementations|
-.. commented out
-        | |commits-since|
+        |commits-since|
 
 .. |docs| image:: https://readthedocs.org/projects/python-singletons/badge/?style=flat
     :target: https://readthedocs.org/projects/python-singletons
@@ -28,10 +27,9 @@ Overview
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/singletons
 
-.. commented out
-    .. |commits-since| image:: https://img.shields.io/github/commits-since/jamesmallen/python-singletons/v0.2.0.svg
-        :alt: Commits since latest release
-        :target: https://github.com/jamesmallen/python-singletons/compare/v0.2.0...master
+.. |commits-since| image:: https://img.shields.io/github/commits-since/jamesmallen/python-singletons/v0.2.0.svg
+    :alt: Commits since latest release
+    :target: https://github.com/jamesmallen/python-singletons/compare/v0.2.0...master
 
 .. |supported-versions| image:: https://img.shields.io/pypi/pyversions/singletons.svg
     :alt: Supported versions
