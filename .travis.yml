@@ -13,9 +13,6 @@ matrix:
     - python: '3.6'
       env:
         - TOXENV=py36,report
-    - python: '3.5'
-      env:
-        - TOXENV=docs
 
 python:
   - '3.6'

@@ -15,9 +15,6 @@ matrix:
       env:
         - TOXENV={{ env }},report
 {%- endfor %}{{ '' }}
-    - python: '3.5'
-      env:
-        - TOXENV=docs
 
 python:
   - '3.6'
