@@ -26,7 +26,7 @@ setup(
     name='singletons',
     version='0.2.0',
     license='MIT license',
-    description='An example package. Generated with cookiecutter-pylibrary.',
+    description='Singleton metaclasses and singleton factories',
     long_description='%s\n%s' % (
         re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
