@@ -22,11 +22,11 @@ if os.getenv('SPELLCHECK'):
 
 source_suffix = '.rst'
 master_doc = 'index'
-project = u'singletons'
+project = 'singletons'
 year = '2018'
-author = u'James M Allen'
+author = 'James M Allen'
 copyright = '{0}, {1}'.format(year, author)
-version = release = u'0.2.0'
+version = release = '0.2.0'
 
 default_role = 'any'
 pygments_style = 'trac'
