@@ -1,9 +1,8 @@
 import multiprocessing
 import queue
 import threading
-import uuid
 from typing import Type
-import warnings
+import uuid
 
 import pytest
 
