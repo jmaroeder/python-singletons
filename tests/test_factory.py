@@ -7,6 +7,7 @@ from typing import Callable, Type
 import pytest
 
 import singletons
+from singletons.exceptions import NoGreenthreadEnvironmentWarning
 
 JOIN_TIMEOUT = 2
 
@@ -49,3 +50,14 @@ def test_process_factory(factory: Callable, queue_cls: Type, process: Type, repe
         assert a == b
         assert a not in seen_uuids
         seen_uuids.add(a)
+
+
+def test_greenthread_factory_with_no_greenthreads():
+    @singletons.GreenthreadFactory
+    def my_uuid():
+        return uuid.uuid4()
+
+    with pytest.warns(NoGreenthreadEnvironmentWarning):
+        a = my_uuid()
+        b = my_uuid()
+        assert a is b

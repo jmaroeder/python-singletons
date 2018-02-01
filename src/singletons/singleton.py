@@ -101,7 +101,6 @@ class GreenthreadSingleton(ProcessSingleton):
 
     Ensures that one instance is created per greenthread (either eventlet or gevent is autodetected)
     """
-
     @staticmethod
     def _get_ident() -> int:
         return greenthread_ident()
@@ -111,7 +110,6 @@ class EventletSingleton(ProcessSingleton):
     """
     Greenthread-based singleton metaclass, targeting eventlet specifically
     """
-
     @staticmethod
     def _get_ident() -> int:
         import eventlet.corolocal  # pylint: disable=import-error

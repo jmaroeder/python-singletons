@@ -3,7 +3,9 @@ Utility classes
 """
 import os
 import sys
+import warnings
 
+from singletons.exceptions import NoGreenthreadEnvironmentWarning
 
 BOOLEAN_TRUE_STRINGS = {'true', 'on', 'ok', 'y', 'yes', '1', }
 _greenthread_environment = None
@@ -48,7 +50,8 @@ def detect_greenthread_environment() -> str:
 
 def greenthread_ident() -> int:
     """
-    Returns the identifier of the current greenthread environment
+    Returns the identifier of the current greenthread environment, falls back to return 0 if no greenthread
+    environment is detected
     """
     greenthread_environment = detect_greenthread_environment()
     if greenthread_environment == 'eventlet':
@@ -57,7 +60,9 @@ def greenthread_ident() -> int:
     if greenthread_environment == 'gevent':
         import gevent.thread  # pylint: disable=import-error
         return gevent.thread.get_ident()
-    raise RuntimeError('No greenthread environment detected')
+    warnings.warn('No greenthread environment detected - falling back to global scope',
+                  NoGreenthreadEnvironmentWarning)
+    return 0
 
 
 def env_to_bool(key: str) -> bool:

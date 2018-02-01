@@ -3,10 +3,12 @@ import queue
 import threading
 import uuid
 from typing import Type
+import warnings
 
 import pytest
 
 import singletons
+from singletons.exceptions import NoGreenthreadEnvironmentWarning
 
 JOIN_TIMEOUT = 2
 
@@ -48,3 +50,13 @@ def test_process_singleton(metaclass: Type, queue_cls: Type, process: Type, repe
         assert a == b
         assert a not in seen_uuids
         seen_uuids.add(a)
+
+
+def test_greenthread_singleton_with_no_greenthreads():
+    class MySingleton(metaclass=singletons.GreenthreadSingleton):
+        pass
+
+    with pytest.warns(NoGreenthreadEnvironmentWarning):
+        a = MySingleton()
+        b = MySingleton()
+        assert a is b
