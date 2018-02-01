@@ -1,4 +1,4 @@
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 
 from .factory import EventletFactory, GeventFactory, GlobalFactory, GreenthreadFactory, ProcessFactory, ThreadFactory
 from .singleton import EventletSingleton, GeventSingleton, GreenthreadSingleton, ProcessSingleton, Singleton, \
