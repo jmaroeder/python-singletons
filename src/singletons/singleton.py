@@ -3,6 +3,7 @@ Singleton metaclasses, decorators, and helpers
 """
 import os
 import threading
+from collections import defaultdict
 
 from singletons.utils import greenthread_ident
 
@@ -26,11 +27,11 @@ class Singleton(type):
 
     """
     __instances = {}
-    __lock = threading.Lock()
+    __locks = defaultdict(threading.Lock)
 
     def __call__(cls, *args, **kwargs):
         if cls not in cls.__instances:
-            with cls.__lock:
+            with cls.__locks[cls]:
                 if cls not in cls.__instances:  # pragma: no branch
                     # double checked locking pattern
                     cls.__instances[cls] = super().__call__(*args, **kwargs)
