@@ -27,9 +27,9 @@ Overview
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/singletons
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/jamesmallen/python-singletons/v0.2.2.svg
+.. |commits-since| image:: https://img.shields.io/github/commits-since/jamesmallen/python-singletons/v0.2.3.svg
     :alt: Commits since latest release
-    :target: https://github.com/jamesmallen/python-singletons/compare/v0.2.2...master
+    :target: https://github.com/jamesmallen/python-singletons/compare/v0.2.3...master
 
 .. |supported-versions| image:: https://img.shields.io/pypi/pyversions/singletons.svg
     :alt: Supported versions
