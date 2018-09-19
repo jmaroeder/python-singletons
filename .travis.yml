@@ -12,7 +12,7 @@ matrix:
   include:
     - python: '3.6'
       env:
-        - TOXENV=py36,report
+        - TOXENV=py36
 
 python:
   - '3.6'
@@ -21,7 +21,7 @@ before_install:
   - uname -a
   - lsb_release -a
 install:
-  - pip install tox coverage==4.2
+  - pip install tox
   - virtualenv --version
   - easy_install --version
   - pip --version
