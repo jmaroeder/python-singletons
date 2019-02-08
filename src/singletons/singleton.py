@@ -52,7 +52,6 @@ class ProcessSingleton(type):
         """
         Returns the identifier for the process
         """
-        print('BAM')
         return os.getpid()
 
     def __call__(cls, *args, **kwargs):
