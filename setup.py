@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name='singletons',
-    version='0.2.3',
+    version='version='0.2.3'',
     license='MIT license',
     description='Singleton metaclasses and singleton factories',
     long_description='%s\n%s' % (
