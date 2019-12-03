@@ -19,25 +19,25 @@ Overview
     :target: https://readthedocs.org/projects/python-singletons
     :alt: Documentation Status
 
-.. |travis| image:: https://travis-ci.org/jmaroeder/python-singletons.svg?branch=master
+.. |travis| image:: https://api.travis-ci.org/jmaroeder/python-singletons.svg?branch=master
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/jmaroeder/python-singletons
 
 .. |version| image:: https://img.shields.io/pypi/v/singletons.svg
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/singletons
+    :target: https://pypi.org/project/singletons/
 
 .. |commits-since| image:: https://img.shields.io/github/commits-since/jmaroeder/python-singletons/v0.2.3.svg
     :alt: Commits since latest release
-    :target: https://github.com/jmaroeder/python-singletons/compare/v0.2.3...master
+    :target: https://github.com/jmaroeder/python-singletons/compare/v0.2.3..master
 
 .. |supported-versions| image:: https://img.shields.io/pypi/pyversions/singletons.svg
     :alt: Supported versions
-    :target: https://pypi.python.org/pypi/singletons
+    :target: https://pypi.org/project/singletons/
 
 .. |supported-implementations| image:: https://img.shields.io/pypi/implementation/singletons.svg
     :alt: Supported implementations
-    :target: https://pypi.python.org/pypi/singletons
+    :target: https://pypi.org/project/singletons/
 
 
 .. end-badges
