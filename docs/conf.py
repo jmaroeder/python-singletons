@@ -23,8 +23,8 @@ if os.getenv('SPELLCHECK'):
 source_suffix = '.rst'
 master_doc = 'index'
 project = 'singletons'
-year = '2018'
-author = 'James M Allen'
+year = '2019'
+author = 'James Roeder'
 copyright = '{0}, {1}'.format(year, author)
 version = release = '0.2.3'
 
@@ -32,8 +32,8 @@ default_role = 'any'
 pygments_style = 'trac'
 templates_path = ['.']
 extlinks = {
-    'issue': ('https://github.com/jamesmallen/python-singletons/issues/%s', '#'),
-    'pr': ('https://github.com/jamesmallen/python-singletons/pull/%s', 'PR #'),
+    'issue': ('https://github.com/jmaroeder/python-singletons/issues/%s', '#'),
+    'pr': ('https://github.com/jmaroeder/python-singletons/pull/%s', 'PR #'),
 }
 # on_rtd is whether we are on readthedocs.org
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'

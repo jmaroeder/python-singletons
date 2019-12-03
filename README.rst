@@ -19,17 +19,17 @@ Overview
     :target: https://readthedocs.org/projects/python-singletons
     :alt: Documentation Status
 
-.. |travis| image:: https://travis-ci.org/jamesmallen/python-singletons.svg?branch=master
+.. |travis| image:: https://travis-ci.org/jmaroeder/python-singletons.svg?branch=master
     :alt: Travis-CI Build Status
-    :target: https://travis-ci.org/jamesmallen/python-singletons
+    :target: https://travis-ci.org/jmaroeder/python-singletons
 
 .. |version| image:: https://img.shields.io/pypi/v/singletons.svg
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/singletons
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/jamesmallen/python-singletons/v0.2.3.svg
+.. |commits-since| image:: https://img.shields.io/github/commits-since/jmaroeder/python-singletons/v0.2.3.svg
     :alt: Commits since latest release
-    :target: https://github.com/jamesmallen/python-singletons/compare/v0.2.3...master
+    :target: https://github.com/jmaroeder/python-singletons/compare/v0.2.3...master
 
 .. |supported-versions| image:: https://img.shields.io/pypi/pyversions/singletons.svg
     :alt: Supported versions

@@ -2,4 +2,5 @@
 Authors
 =======
 
-* James M Allen - https://jamesmallen.net
+* James Roeder - https://www.jroeder.net
+
