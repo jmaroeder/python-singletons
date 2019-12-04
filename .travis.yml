@@ -6,7 +6,7 @@ python:
 before_install:
   - pip install poetry
 install:
-  - poetry install -v
+  - poetry install -v --extras "eventlet gevent"
   - pip install tox-travis
 script:
   - tox
