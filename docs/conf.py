@@ -26,7 +26,6 @@ project = 'singletons'
 year = '2019'
 author = 'James Roeder'
 copyright = '{0}, {1}'.format(year, author)
-version = release = 'version = release = '0.2.4''
 
 default_role = 'any'
 pygments_style = 'trac'
@@ -47,7 +46,7 @@ html_split_index = False
 html_sidebars = {
    '**': ['searchbox.html', 'globaltoc.html', 'sourcelink.html'],
 }
-html_short_title = '%s-%s' % (project, version)
+html_short_title = '%s' % project
 
 napoleon_use_ivar = True
 napoleon_use_rtype = False

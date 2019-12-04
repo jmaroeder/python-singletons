@@ -1,5 +1,7 @@
 import multiprocessing
+import platform
 import queue
+import sys
 import threading
 import uuid
 from typing import Callable, Type
@@ -23,24 +25,37 @@ def test_global_factory() -> None:
     assert a is b
 
 
-@pytest.mark.parametrize('factory,queue_cls,process,repetitions', [
-    (singletons.ProcessFactory, multiprocessing.Queue, multiprocessing.Process, 8),
-    (singletons.ThreadFactory, queue.Queue, threading.Thread, 8),
+@singletons.ProcessFactory
+def process_my_uuid():
+    return uuid.uuid4()
+
+
+def process_inner_func(q: multiprocessing.Queue):
+    a = process_my_uuid()
+    b = process_my_uuid()
+    q.put((a, b,))
+
+
+@singletons.ThreadFactory
+def thread_my_uuid():
+    return uuid.uuid4()
+
+
+def thread_inner_func(q: queue.Queue):
+    a = thread_my_uuid()
+    b = thread_my_uuid()
+    q.put((a, b,))
+
+
+@pytest.mark.parametrize('prefix,queue_cls,process,repetitions', [
+    ('process', multiprocessing.Queue, multiprocessing.Process, 8),
+    ('thread', queue.Queue, threading.Thread, 8),
 ])
-def test_process_factory(factory: Callable, queue_cls: Type, process: Type, repetitions: int) -> None:
-    @factory
-    def my_uuid():
-        return uuid.uuid4()
-
-    def inner_func(q: queue_cls) -> None:
-        a = my_uuid()
-        b = my_uuid()
-        q.put((a, b,))
-
+def test_process_factory(prefix: str, queue_cls: Type, process: Type, repetitions: int) -> None:
     test_q = queue_cls()
     processes = []
     for _ in range(repetitions):
-        p = process(target=inner_func, args=(test_q,))
+        p = process(target=globals()[f'{prefix}_inner_func'], args=(test_q,))
         p.start()
         processes.append(p)
 

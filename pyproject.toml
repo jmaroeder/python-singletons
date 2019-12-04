@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "python-singletons"
+version = "0.2.4"
+description = "Singleton metaclasses and singleton factories"
+authors = ["James Roeder <jmaroeder@gmail.com>"]
+license = "MIT"
+packages = [
+    { include = "singletons", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.6, <4"
+gevent = {version = "^1.4", optional = true}
+eventlet = {version = "^0.25.1", optional = true}
+
+[tool.poetry.dev-dependencies]
+tox = "^3"
+pytest = "^5.3.1"
+
+[tool.poetry.extras]
+eventlet = ["eventlet"]
+gevent = ["gevent"]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+

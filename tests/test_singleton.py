@@ -22,24 +22,37 @@ def test_singleton() -> None:
     assert a is b
 
 
-@pytest.mark.parametrize('metaclass,queue_cls,process,repetitions', [
-    (singletons.ProcessSingleton, multiprocessing.Queue, multiprocessing.Process, 8),
-    (singletons.ThreadSingleton, queue.Queue, threading.Thread, 8),
+class MyProcessSingleton(metaclass=singletons.ProcessSingleton):
+    def __init__(self) -> None:
+        self.uuid = uuid.uuid4()
+
+
+def process_inner_func(q: multiprocessing.Queue):
+    a = MyProcessSingleton()
+    b = MyProcessSingleton()
+    q.put((a, b,))
+
+
+class MyThreadSingleton(metaclass=singletons.ThreadSingleton):
+    def __init__(self) -> None:
+        self.uuid = uuid.uuid4()
+
+
+def thread_inner_func(q: queue.Queue):
+    a = MyThreadSingleton()
+    b = MyThreadSingleton()
+    q.put((a, b,))
+
+
+@pytest.mark.parametrize('prefix,queue_cls,process,repetitions', [
+    ('process', multiprocessing.Queue, multiprocessing.Process, 8),
+    ('thread', queue.Queue, threading.Thread, 8),
 ])
-def test_process_singleton(metaclass: Type, queue_cls: Type, process: Type, repetitions: int) -> None:
-    class MySingleton(metaclass=metaclass):
-        def __init__(self) -> None:
-            self.uuid = uuid.uuid4()
-
-    def inner_func(q: queue_cls) -> None:
-        a = MySingleton()
-        b = MySingleton()
-        q.put((a.uuid, b.uuid,))
-
+def test_process_singleton(prefix: str, queue_cls: Type, process: Type, repetitions: int) -> None:
     test_q = queue_cls()
     processes = []
     for _ in range(repetitions):
-        p = process(target=inner_func, args=(test_q,))
+        p = process(target=globals()[f'{prefix}_inner_func'], args=(test_q,))
         p.start()
         processes.append(p)
 
