@@ -4,7 +4,7 @@ target-version = ['py36']
 
 [tool.poetry]
 name = "python-singletons"
-version = "0.2.4"
+version = "0.2.5"
 description = "Singleton metaclasses and singleton factories"
 authors = ["James Roeder <jmaroeder@gmail.com>"]
 license = "MIT"
