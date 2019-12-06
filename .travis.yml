@@ -11,6 +11,8 @@ matrix:
   include:
     - python: 3.8
       env: TOXENV=precommit
+    - python: 3.8
+      env: DEPLOYENV=true
 
 install:
   - pip install tox tox-travis
@@ -18,15 +20,16 @@ script:
   - tox
 
 before_deploy:
+  - pip install poetry
   - poetry config http-basic.pypi $PYPI_USERNAME $PYPI_PASSWORD
 
 deploy:
   - provider: script
     skip_cleanup: true
     script: poetry publish --build
-    skip_existing: true
     on:
       all_branches: true
+      condition: $DEPLOYENV = true
       python: 3.8
       repo: jmaroeder/python-singletons
       tags: true
