@@ -4,7 +4,6 @@ from typing import Type
 import gevent
 import gevent.queue
 import pytest
-
 import singletons
 import singletons.singleton
 import singletons.utils
@@ -12,20 +11,22 @@ import singletons.utils
 JOIN_TIMEOUT = 2
 
 
-@pytest.fixture
-def force_gevent():
-    singletons.utils._greenthread_environment = 'gevent'
+@pytest.fixture()
+def _force_gevent():
+    """Manually mark the greenthread environment as ``gevent``."""
+    singletons.utils._greenthread_environment = "gevent"
     yield
     singletons.utils._greenthread_environment = None
 
 
-@pytest.mark.usefixtures('force_gevent')
-@pytest.mark.parametrize('metaclass,repetitions', [
-    (singletons.GreenthreadSingleton, 10),
-    (singletons.GeventSingleton, 10),
-])
+@pytest.mark.usefixtures("_force_gevent")
+@pytest.mark.parametrize(
+    ("metaclass", "repetitions"),
+    [(singletons.GreenthreadSingleton, 10), (singletons.GeventSingleton, 10)],
+)
 def test_greenthread_singleton(metaclass: Type, repetitions: int):
-    assert singletons.detect_greenthread_environment() == 'gevent'
+    """Test Greenthread Singleton with Gevent."""
+    assert singletons.detect_greenthread_environment() == "gevent"
 
     class MySingleton(metaclass=metaclass):
         def __init__(self):
@@ -34,7 +35,7 @@ def test_greenthread_singleton(metaclass: Type, repetitions: int):
     def inner_func(q: gevent.queue.Queue):
         a = MySingleton()
         b = MySingleton()
-        q.put((a.uuid, b.uuid,))
+        q.put((a.uuid, b.uuid))
 
     test_q = gevent.queue.Queue()
     greenthreads = []

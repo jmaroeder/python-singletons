@@ -3,7 +3,6 @@ from typing import Type
 
 import eventlet
 import pytest
-
 import singletons
 import singletons.singleton
 import singletons.utils
@@ -11,20 +10,22 @@ import singletons.utils
 JOIN_TIMEOUT = 2
 
 
-@pytest.fixture
-def force_eventlet():
-    singletons.utils._greenthread_environment = 'eventlet'
+@pytest.fixture()
+def _force_eventlet():
+    """Manually mark the greenthread environment as ``eventlet``."""
+    singletons.utils._greenthread_environment = "eventlet"
     yield
     singletons.utils._greenthread_environment = None
 
 
-@pytest.mark.usefixtures('force_eventlet')
-@pytest.mark.parametrize('metaclass,repetitions', [
-    (singletons.GreenthreadSingleton, 10),
-    (singletons.EventletSingleton, 10),
-])
+@pytest.mark.usefixtures("_force_eventlet")
+@pytest.mark.parametrize(
+    ("metaclass", "repetitions"),
+    [(singletons.GreenthreadSingleton, 10), (singletons.EventletSingleton, 10)],
+)
 def test_greenthread_singleton(metaclass: Type, repetitions: int):
-    assert singletons.detect_greenthread_environment() == 'eventlet'
+    """Test Greenthread Singleton with Eventlet."""
+    assert singletons.detect_greenthread_environment() == "eventlet"
 
     class MySingleton(metaclass=metaclass):
         def __init__(self):
@@ -33,7 +34,7 @@ def test_greenthread_singleton(metaclass: Type, repetitions: int):
     def inner_func(q: eventlet.Queue):
         a = MySingleton()
         b = MySingleton()
-        q.put((a.uuid, b.uuid,))
+        q.put((a.uuid, b.uuid))
 
     test_q = eventlet.Queue()
     greenthreads = []

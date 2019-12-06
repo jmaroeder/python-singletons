@@ -54,7 +54,7 @@ Quick Example
 
 ::
 
-	import singletons
+    import singletons
 
     @singletons.GlobalFactory
     def my_uuid():

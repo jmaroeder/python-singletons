@@ -1,11 +1,18 @@
 language: python
+cache:
+  pip: true
+  directories:
+    - $HOME/.cache/pre-commit
 python:
   - "3.6"
   - "3.7"
   - "3.8"
-before_install:
-  - pip install poetry
+matrix:
+  include:
+    - python: 3.8
+      env: TOXENV=precommit
+
 install:
-  - pip install tox-travis
+  - pip install tox tox-travis
 script:
   - tox
