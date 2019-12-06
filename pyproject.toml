@@ -13,7 +13,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6, <4"
+python = "^3.6"
 gevent = {version = "^1.4", optional = true}
 eventlet = {version = "^0.25.1", optional = true}
 

@@ -12,8 +12,7 @@ Overview
     * - tests
       - |travis|
     * - package
-      - |version| |supported-versions| |supported-implementations|
-        |commits-since|
+      - |version| |supported-versions|
 
 .. |docs| image:: https://readthedocs.org/projects/python-singletons/badge/?style=flat
     :target: https://readthedocs.org/projects/python-singletons
@@ -29,10 +28,6 @@ Overview
 
 .. |supported-versions| image:: https://img.shields.io/pypi/pyversions/singletons.svg
     :alt: Supported versions
-    :target: https://pypi.org/project/singletons/
-
-.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/singletons.svg
-    :alt: Supported implementations
     :target: https://pypi.org/project/singletons/
 
 
