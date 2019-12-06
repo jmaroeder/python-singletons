@@ -25,9 +25,11 @@ repos:
     hooks:
       - id: xenon
         name: xenon
-        entry: poetry run xenon
-        args: [--max-absolute=B, --max-modules=A, --max-average=A, src]
-        language: system
+        entry: xenon --max-absolute=B --max-modules=A --max-average=A
+        args: [src]
+        language: python
+        types: [python]
+        additional_dependencies: [xenon]
         pass_filenames: false
       - id: poetry
         name: poetry check
@@ -45,6 +47,5 @@ repos:
         language: python
         require_serial: true
         types: [python]
+        additional_dependencies: [black]
         stages: [manual]
-        additional_dependencies:
-          - black
