@@ -16,3 +16,17 @@ install:
   - pip install tox tox-travis
 script:
   - tox
+
+before_deploy:
+  - poetry config http-basic.pypi $PYPI_USERNAME $PYPI_PASSWORD
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: poetry publish --build
+    skip_existing: true
+    on:
+      all_branches: true
+      python: 3.8
+      repo: jmaroeder/python-singletons
+      tags: true
