@@ -19,12 +19,11 @@ script:
 
 before_deploy:
   - pip install poetry
-  - poetry config http-basic.pypi $PYPI_USERNAME $PYPI_PASSWORD
 
 deploy:
   - provider: script
     skip_cleanup: true
-    script: poetry publish --build
+    script: poetry publish --build --username $PYPI_USERNAME --password $PYPI_PASSWORD
     on:
       all_branches: true
       condition: $TOXENV != precommit
