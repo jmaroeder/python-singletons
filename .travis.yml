@@ -1,37 +1,32 @@
 language: python
-sudo: false
-cache: pip
-env:
-  global:
-    - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
-    - SEGFAULT_SIGNALS=all
-  matrix:
-    - TOXENV=check
-    - TOXENV=docs
+cache:
+  pip: true
+  directories:
+    - $HOME/.cache/pre-commit
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
 matrix:
   include:
-    - python: '3.6'
-      env:
-        - TOXENV=py36
+    - python: 3.8
+      env: TOXENV=precommit
 
-python:
-  - '3.6'
-before_install:
-  - python --version
-  - uname -a
-  - lsb_release -a
 install:
-  - pip install tox
-  - virtualenv --version
-  - easy_install --version
-  - pip --version
-  - tox --version
+  - pip install tox tox-travis
 script:
-  - tox -v
-after_failure:
-  - more .tox/log/* | cat
-  - more .tox/*/log/* | cat
-notifications:
-  email:
-    on_success: never
-    on_failure: always
+  - tox
+
+before_deploy:
+  - poetry config http-basic.pypi $PYPI_USERNAME $PYPI_PASSWORD
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: poetry publish --build
+    skip_existing: true
+    on:
+      all_branches: true
+      python: 3.8
+      repo: jmaroeder/python-singletons
+      tags: true

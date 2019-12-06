@@ -5,7 +5,7 @@ Usage
 One of the simplest ways to use ``singletons`` is using a factory decorator to make the return value of a function a singleton object. Create a ``shared.py`` file::
 
     import uuid
-	import singletons
+    import singletons
 
     @singletons.GlobalFactory
     def my_uuid():

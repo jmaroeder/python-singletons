@@ -1,11 +1,10 @@
 import multiprocessing
 import queue
 import threading
-from typing import Type
 import uuid
+from typing import Type
 
 import pytest
-
 import singletons
 from singletons.exceptions import NoGreenthreadEnvironmentWarning
 
@@ -13,8 +12,10 @@ JOIN_TIMEOUT = 2
 
 
 def test_singleton() -> None:
+    """Tests Singleton."""
+
     class MySingleton(metaclass=singletons.Singleton):
-        pass
+        """Dummy Singleton class."""
 
     a = MySingleton()
     b = MySingleton()
@@ -22,24 +23,47 @@ def test_singleton() -> None:
     assert a is b
 
 
-@pytest.mark.parametrize('metaclass,queue_cls,process,repetitions', [
-    (singletons.ProcessSingleton, multiprocessing.Queue, multiprocessing.Process, 8),
-    (singletons.ThreadSingleton, queue.Queue, threading.Thread, 8),
-])
-def test_process_singleton(metaclass: Type, queue_cls: Type, process: Type, repetitions: int) -> None:
-    class MySingleton(metaclass=metaclass):
-        def __init__(self) -> None:
-            self.uuid = uuid.uuid4()
+class MyProcessSingleton(metaclass=singletons.ProcessSingleton):
+    """Class used to test ProcessSingleton."""
 
-    def inner_func(q: queue_cls) -> None:
-        a = MySingleton()
-        b = MySingleton()
-        q.put((a.uuid, b.uuid,))
+    def __init__(self) -> None:
+        self.uuid = uuid.uuid4()
 
+
+def process_inner_func(q: multiprocessing.Queue):
+    """Helper function to test ProcessSingleton."""
+    a = MyProcessSingleton()
+    b = MyProcessSingleton()
+    q.put((a, b))
+
+
+class MyThreadSingleton(metaclass=singletons.ThreadSingleton):
+    """Class used to test ThreadSingleton."""
+
+    def __init__(self) -> None:
+        self.uuid = uuid.uuid4()
+
+
+def thread_inner_func(q: queue.Queue):
+    """Helper function to test ThreadSingleton."""
+    a = MyThreadSingleton()
+    b = MyThreadSingleton()
+    q.put((a, b))
+
+
+@pytest.mark.parametrize(
+    ("prefix", "queue_cls", "process", "repetitions"),
+    [
+        ("process", multiprocessing.Queue, multiprocessing.Process, 8),
+        ("thread", queue.Queue, threading.Thread, 8),
+    ],
+)
+def test_process_singleton(prefix: str, queue_cls: Type, process: Type, repetitions: int) -> None:
+    """Test Process and Thread Singletons."""
     test_q = queue_cls()
     processes = []
     for _ in range(repetitions):
-        p = process(target=inner_func, args=(test_q,))
+        p = process(target=globals()[f"{prefix}_inner_func"], args=(test_q,))
         p.start()
         processes.append(p)
 
@@ -51,9 +75,11 @@ def test_process_singleton(metaclass: Type, queue_cls: Type, process: Type, repe
         seen_uuids.add(a)
 
 
-def test_greenthread_singleton_with_no_greenthreads():
+def test_greenthread_singleton_no_greenthreads():
+    """Test Greenthread Singleton when there are no greenthread libraries enabled."""
+
     class MySingleton(metaclass=singletons.GreenthreadSingleton):
-        pass
+        """Dummy Greenthread Singleton class."""
 
     with pytest.warns(NoGreenthreadEnvironmentWarning):
         a = MySingleton()

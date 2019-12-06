@@ -1,0 +1,51 @@
+fail_fast: true
+repos:
+  - repo: https://github.com/psf/black
+    rev: 19.10b0
+    hooks:
+      - id: black
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.4.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-yaml
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.7.9
+    hooks:
+      - id: flake8
+        additional_dependencies:
+          - wemake-python-styleguide
+          - flake8-pytest-style
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.750
+    hooks:
+      - id: mypy
+        exclude: tests/
+  - repo: local
+    hooks:
+      - id: xenon
+        name: xenon
+        entry: xenon --max-absolute=B --max-modules=A --max-average=A
+        args: [src]
+        language: python
+        types: [python]
+        additional_dependencies: [xenon]
+        pass_filenames: false
+      - id: poetry
+        name: poetry check
+        entry: poetry check
+        language: system
+        pass_filenames: false
+      - id: pip
+        name: pip check
+        entry: pip check
+        language: system
+        pass_filenames: false
+      - id: black_check
+        name: black --check
+        entry: black --check
+        language: python
+        require_serial: true
+        types: [python]
+        additional_dependencies: [black]
+        stages: [manual]
